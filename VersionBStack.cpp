@@ -14,6 +14,8 @@ VersionBStack::VersionBStack()
 
 // Destructor
 VersionBStack::~VersionBStack() {
+
+    // Traverse each node to free memory
     BigramNode* nodePtr = top;
     BigramNode* nextNode = nullptr;
     while (nodePtr != nullptr) {
@@ -29,10 +31,11 @@ int VersionBStack::push(const Bigram& bigram) {
     if (isFull())
         return -1;
 
+    // Create new node
     BigramNode* newNode = new BigramNode;
     newNode->value = bigram;
-
     ++nodeCount;
+
     if (isEmpty()) {
         top = newNode;
         newNode->next = nullptr;
@@ -49,13 +52,16 @@ int VersionBStack::pop(Bigram& bigram) {
     if (isEmpty())
         return -1;
     else {
-        BigramNode* temp = nullptr;
+        // Modify parameter for the user
         bigram.first = top->value.first;
         bigram.second = top->value.second;
-        temp = top->next;
+
+        // Pop top node off, deleting it
+        BigramNode* temp = top->next;
         delete top;
         top = temp;
         --nodeCount;
+
         return 0;
     }
 }

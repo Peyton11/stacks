@@ -7,6 +7,7 @@
 #include <cctype>
 
 struct Bigram {
+
     char first;
     char second;
 

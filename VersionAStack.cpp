@@ -1,11 +1,11 @@
 // VersionAStack.cpp
-// Implementation for the Version A Stack. Stack of bigrams that cannot dynamically resize. Max size of 6.
+// Implementation for the Version A Stack using arrays
 
 #include "VersionAStack.hpp"
 #include "Bigram.hpp"
 #include <iostream>
 
-// Constructor. Sets max stack size to 6
+// Constructor 
 VersionAStack::VersionAStack()
     : stackSize(6), top(-1) {
         stackArray = new Bigram[stackSize];
@@ -45,6 +45,7 @@ int VersionAStack::status() const {
         return -1;
     }
 
+    // Output bigram at the top of the stack and output the entire stack
     std::cout << "Stack pointer: " << stackArray[top].first << stackArray[top].second << '\n';
     for (int i = top; i >= 0; --i) {
         std::cout << "Index " << i << "- " << stackArray[i].first << stackArray[i].second << '\n';

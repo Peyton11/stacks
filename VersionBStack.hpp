@@ -43,6 +43,7 @@ private:
     // Pointer to track top of stack
     BigramNode* top;
 
+    // number of nodes
     int nodeCount;
 };
 

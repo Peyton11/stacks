@@ -1,5 +1,5 @@
 // VersionAStack.hpp
-// Implementation for the Version A Stack. Stack of bigrams that cannot dynamically resize. Max size of 6.
+// Implementation for the Version A Stack using arrays
 
 #ifndef VERSIONASTACK_HPP
 #define VERSIONASTACK_HPP
