@@ -13,7 +13,13 @@ VersionBStack::VersionBStack()
 
 // Destructor
 VersionBStack::~VersionBStack() {
-
+    BigramNode* nodePtr = top;
+    BigramNode* nextNode = nullptr;
+    while (nodePtr != nullptr) {
+        nextNode = nodePtr->next;
+        delete nodePtr;
+        nodePtr = nextNode;
+    }
 }
 
 // Push bigram onto top of stack
