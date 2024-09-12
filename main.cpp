@@ -3,6 +3,7 @@
 
 #include "VersionAStack.hpp"
 #include "VersionBStack.hpp"
+#include "Bigram.hpp"
 #include <iostream>
 
 int main() {
@@ -23,26 +24,28 @@ int main() {
         int status = 0;
 
         // Test case: trigger underflow
-        status = stack.pop("aa");
+        Bigram pop1('a', 'a');
+        status = stack.pop(pop1);
         if (status != 0)
             std::cout << "Underflow ocurred after popping.\n";
 
         status = 0;
 
         // Test case: fill stack with no errors
-        stack.push("aa");
-        stack.push("bb");
-        stack.push("cc");
-        stack.push("dd");
-        stack.push("ee");
-        stack.push("ff");
+        stack.push(Bigram('a', 'a'));
+        stack.push(Bigram('b', 'b'));
+        stack.push(Bigram('c', 'c'));
+        stack.push(Bigram('d', 'd'));
+        stack.push(Bigram('e', 'e'));
+        stack.push(Bigram('f', 'f'));
 
         // Test case: trigger overflow
-        status = stack.push("ff");
+        status = stack.push(Bigram('f', 'f'));
         if (status != 0)
             std::cout << "Overflow occurred after pushing.\n";
 
-        stack.pop("ff");
+        Bigram pop2('f', 'f');
+        stack.pop(pop2);
 
         // output top value of stack and the entire stack
         stack.status();
@@ -55,26 +58,28 @@ int main() {
         int status = 0;
 
         // Test case: trigger underflow
-        status = stack.pop("aa");
+        Bigram pop1('a', 'a');
+        status = stack.pop(pop1);
         if (status != 0)
             std::cout << "Underflow ocurred after popping.\n";
 
         status = 0;
 
         // Test case: fill stack with no errors
-        stack.push("aa");
-        stack.push("bb");
-        stack.push("cc");
-        stack.push("dd");
-        stack.push("ee");
-        stack.push("ff");
+        stack.push(Bigram('a', 'a'));
+        stack.push(Bigram('b', 'b'));
+        stack.push(Bigram('c', 'c'));
+        stack.push(Bigram('d', 'd'));
+        stack.push(Bigram('e', 'e'));
+        stack.push(Bigram('f', 'f'));
 
         // Test case: trigger overflow
-        status = stack.push("ff");
+        status = stack.push(Bigram('f', 'f'));
         if (status != 0)
             std::cout << "Overflow occurred after pushing.\n";
 
-        stack.pop("ff");
+        Bigram pop2('f', 'f');
+        stack.pop(pop2);
 
         // output top value of stack and the entire stack
         stack.status();

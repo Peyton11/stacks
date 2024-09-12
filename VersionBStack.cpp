@@ -2,6 +2,7 @@
 // Implementation for the Version B Stack
 
 #include "VersionBStack.hpp"
+#include "Bigram.hpp"
 #include <iostream>
 #include <cctype>
 
@@ -23,14 +24,13 @@ VersionBStack::~VersionBStack() {
 }
 
 // Push bigram onto top of stack
-int VersionBStack::push(const char bigram[2]) {
+int VersionBStack::push(const Bigram& bigram) {
 
     if (isFull())
         return -1;
 
     BigramNode* newNode = new BigramNode;
-    newNode->value[0] = toupper(bigram[0]);
-    newNode->value[1] = toupper(bigram[1]);
+    newNode->value = bigram;
 
     ++nodeCount;
     if (isEmpty()) {
@@ -45,12 +45,13 @@ int VersionBStack::push(const char bigram[2]) {
 }
 
 // Remove bigram from top of stack
-int VersionBStack::pop(const char bigram[2]) {
+int VersionBStack::pop(Bigram& bigram) {
     if (isEmpty())
         return -1;
     else {
         BigramNode* temp = nullptr;
-        bigram = top->value;
+        bigram.first = top->value.first;
+        bigram.second = top->value.second;
         temp = top->next;
         delete top;
         top = temp;
@@ -65,13 +66,13 @@ int VersionBStack::status() const {
         return -1;
 
     // Output the top bigram of the stack
-    std::cout << "Stack top: " << top->value << '\n';
+    std::cout << "Stack top: " << top->value.first << top->value.second << '\n';
 
     // Traverse each node to output the entire stack
     BigramNode* nodePtr = top;
     int indexNumber = nodeCount - 1;
     while (nodePtr != nullptr) {
-        std::cout << "Index " << indexNumber << "- " << nodePtr->value << '\n';
+        std::cout << "Index " << indexNumber << "- " << nodePtr->value.first << nodePtr->value.second << '\n';
         nodePtr = nodePtr->next;
         --indexNumber;
     }

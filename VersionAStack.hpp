@@ -4,6 +4,8 @@
 #ifndef VERSIONASTACK_HPP
 #define VERSIONASTACK_HPP
 
+#include "Bigram.hpp"
+
 class VersionAStack {
 public:
 
@@ -14,10 +16,10 @@ public:
     ~VersionAStack();
 
     // Push bigram onto top of stack
-    int push(const char bigram[2]);
+    int push(const Bigram& bigram);
 
     // Remove bigram from top of stack
-    int pop(const char bigram[2]);
+    int pop(Bigram& bigram);
 
     // Show contents and stack pointer
     int status() const;
@@ -33,7 +35,7 @@ private:
     int stackSize;
 
     // Stack pointer
-    char (*stackArray)[2];
+    Bigram* stackArray;
 
     // Indicates the top index of the stack
     int top;

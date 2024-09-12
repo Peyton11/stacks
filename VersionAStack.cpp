@@ -2,13 +2,13 @@
 // Implementation for the Version A Stack. Stack of bigrams that cannot dynamically resize. Max size of 6.
 
 #include "VersionAStack.hpp"
+#include "Bigram.hpp"
 #include <iostream>
-#include <cctype>
 
 // Constructor. Sets max stack size to 6
 VersionAStack::VersionAStack()
     : stackSize(6), top(-1) {
-        stackArray = new char[stackSize][2];
+        stackArray = new Bigram[stackSize];
     }
 
 // Destructor
@@ -17,23 +17,23 @@ VersionAStack::~VersionAStack() {
 }
 
 // Push bigram onto top of stack
-int VersionAStack::push(const char bigram[2]) {
+int VersionAStack::push(const Bigram& bigram) {
     if (isFull())
         return -1;
     else {
         ++top;
-        stackArray[top][0] = toupper(bigram[0]);
-        stackArray[top][1] = toupper(bigram[1]);
+        stackArray[top] = bigram;
         return 0;
     }
 }
 
 // Remove bigram from top of stack
-int VersionAStack::pop(const char bigram[2]) {
+int VersionAStack::pop(Bigram& bigram) {
     if (isEmpty()) {
         return -1;
     }
     else {
+        bigram = stackArray[top];
         --top;
         return 0;
     }
@@ -45,9 +45,9 @@ int VersionAStack::status() const {
         return -1;
     }
 
-    std::cout << "Stack pointer: " << stackArray[top][0] << stackArray[top][1] << '\n';
+    std::cout << "Stack pointer: " << stackArray[top].first << stackArray[top].second << '\n';
     for (int i = top; i >= 0; --i) {
-        std::cout << "Index " << i << "- " << stackArray[i][0] << stackArray[i][1] << '\n';
+        std::cout << "Index " << i << "- " << stackArray[i].first << stackArray[i].second << '\n';
     }
     return 0;
 }

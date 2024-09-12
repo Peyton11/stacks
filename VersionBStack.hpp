@@ -4,6 +4,8 @@
 #ifndef VERSIONBSTACK_HPP
 #define VERSIONBSTACK_HPP
 
+#include "Bigram.hpp"
+
 class VersionBStack {
 public:
 
@@ -14,10 +16,10 @@ public:
     ~VersionBStack();
 
     // Push bigram onto top of stack
-    int push(const char bigram[2]);
+    int push(const Bigram& bigram);
 
     // Remove bigram from top of stack
-    int pop(const char bigram[2]);
+    int pop(Bigram& bigram);
 
     // Show contents and stack pointer
     int status() const;
@@ -34,7 +36,7 @@ private:
     // Each node contains a bigram and a pointer to the next node
     struct BigramNode
     {
-        char value[2];
+        Bigram value;
         BigramNode* next;
     };
 
