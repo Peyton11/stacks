@@ -1,5 +1,5 @@
 // VersionAStack.cpp
-// Implementation for the Version A Stack. Contiguous concept, nominal vector
+// Implementation for the Version A Stack. Stack of bigrams that cannot dynamically resize. Max size of 6.
 
 #include "VersionAStack.hpp"
 #include <iostream>
@@ -8,7 +8,7 @@
 // Constructor. Sets max stack size to 6
 VersionAStack::VersionAStack()
     : stackSize(6), top(-1) {
-        stackArray = new char*[6];
+        stackArray = new char[stackSize][2];
     }
 
 // Destructor
@@ -16,22 +16,21 @@ VersionAStack::~VersionAStack() {
     delete [] stackArray;
 }
 
-
 // Push bigram onto top of stack
-int VersionAStack::push(char bigram[2]) {
-    if (isFull()) {
+int VersionAStack::push(const char bigram[2]) {
+    if (isFull())
         return -1;
-    } else {
+    else {
         ++top;
-        stackArray[top] = bigram;
+        stackArray[top][0] = toupper(bigram[0]);
+        stackArray[top][1] = toupper(bigram[1]);
         return 0;
     }
 }
 
 // Remove bigram from top of stack
-int VersionAStack::pop() {
+int VersionAStack::pop(const char bigram[2]) {
     if (isEmpty()) {
-        std::cout << "The stack is empty- nothing to pop.\n";
         return -1;
     }
     else {
@@ -43,13 +42,12 @@ int VersionAStack::pop() {
 // Show contents and stack pointer
 int VersionAStack::status() const {
     if (isEmpty()) {
-        std::cout << "The stack is empty- nothing to display.\n";
         return -1;
     }
 
-    std::cout << "Stack pointer: " << stackArray[top] << '\n';
+    std::cout << "Stack pointer: " << stackArray[top][0] << stackArray[top][1] << '\n';
     for (int i = top; i >= 0; --i) {
-        std::cout << "Index " << i << "- " << stackArray[i] << '\n';
+        std::cout << "Index " << i << "- " << stackArray[i][0] << stackArray[i][1] << '\n';
     }
     return 0;
 }

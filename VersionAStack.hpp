@@ -1,5 +1,5 @@
 // VersionAStack.hpp
-// Interface for the Version A Stack. Contiguous concept, nominal vector
+// Implementation for the Version A Stack. Stack of bigrams that cannot dynamically resize. Max size of 6.
 
 #ifndef VERSIONASTACK_HPP
 #define VERSIONASTACK_HPP
@@ -14,10 +14,10 @@ public:
     ~VersionAStack();
 
     // Push bigram onto top of stack
-    int push(char[2]);
+    int push(const char bigram[2]);
 
     // Remove bigram from top of stack
-    int pop();
+    int pop(const char bigram[2]);
 
     // Show contents and stack pointer
     int status() const;
@@ -33,7 +33,7 @@ private:
     int stackSize;
 
     // Stack pointer
-    char** stackArray;
+    char (*stackArray)[2];
 
     // Indicates the top index of the stack
     int top;
