@@ -7,7 +7,7 @@
 
 int main() {
 
-    // Prompt user for which stack to use. Continue prompting until correct answer is inputted
+    // Prompt user for which stack to use. Continue prompting until valid answer is inputted
     char stackChoice;
     do {
         std::cout << "Stack A or Stack B? [A/B]: ";
@@ -16,6 +16,17 @@ int main() {
 
     // Use push, pop, and status methods with corresponding stack
     if (stackChoice == 'A' || stackChoice == 'a') {
+
+        VersionAStack stack;
+
+        // TEST
+        stack.push("aa");
+        stack.push("bb");
+        stack.push("cc");
+        stack.push("dd");
+        stack.push("ee");
+        stack.push("ff");
+        stack.status();
 
     } else if (stackChoice == 'B' || stackChoice == 'b') {
 
