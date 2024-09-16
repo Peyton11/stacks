@@ -18,72 +18,162 @@ int main() {
     // Use push, pop, and status methods with corresponding stack
     if (stackChoice == 'A' || stackChoice == 'a') {
 
+        // Declare stack choice
         VersionAStack stack;
 
-        // 0 = Success. -1 = failure. Check for push, pop, and status
-        int status = 0;
+        // Flag to perform more operations
+        bool again = true;
 
-        // Test case: trigger underflow
-        Bigram pop1('a', 'a');
-        status = stack.pop(pop1);
-        if (status != 0)
-            std::cout << "Underflow ocurred after popping.\n";
+        while (again) {
 
-        status = 0;
+            // User inputs which stack operation to perform
+            int operationChoice;
+            do {
+                std::cout << "Select stack operation:\nPush[1]\nPop[2]\nStatus[3]\nEnd Program[4]\nOperation Choice: ";
+                std::cin >> operationChoice;
+            } while (operationChoice != 1 && operationChoice != 2 && operationChoice != 3 && operationChoice != 4);
 
-        // Test case: fill stack with no errors
-        stack.push(Bigram('a', 'a'));
-        stack.push(Bigram('b', 'b'));
-        stack.push(Bigram('c', 'c'));
-        stack.push(Bigram('d', 'd'));
-        stack.push(Bigram('e', 'e'));
-        stack.push(Bigram('f', 'f'));
+            // User inputted bigram
+            char inputBigram[3];
 
-        // Test case: trigger overflow
-        status = stack.push(Bigram('f', 'f'));
-        if (status != 0)
-            std::cout << "Overflow occurred after pushing.\n";
+            // Status from stack operations. (0==success. -1==failure)
+            int status;
 
-        Bigram pop2('f', 'f');
-        stack.pop(pop2);
+            switch(operationChoice) {
+            // Push
+            case 1: {
+                // Input bigram to push onto stack
+                std::cout << "Input bigram: ";
+                std::cin >> inputBigram;
 
-        // output top value of stack and the entire stack
-        stack.status();
+                // Initialize bigram object with user input
+                Bigram bigram(inputBigram[0], inputBigram[1]);
+
+                status = stack.push(bigram);
+                if (status != 0)
+                    std::cout << "Overflow occured after pushing\n";
+                else
+                    std::cout << "Successfully pushed: " << bigram.first << bigram.second << '\n';
+                break;
+            }
+            // Pop
+            case 2: {
+                Bigram popped;
+                status = stack.pop(popped);
+                if (status != 0)
+                    std::cout << "Underflow occured after popping\n";
+                else
+                    std::cout << "Successfully popped: " << popped.first << popped.second << '\n';
+                break;
+            }
+            // Status
+            case 3: {
+                status = stack.status();
+                if (status != 0)
+                    std::cout << "Stack is empty.\n";
+                else
+                    std::cout << "Successful stack!\n";
+                break;
+            }
+            // End program
+            default: {
+                std::cout << "Program ended\n";
+                return 0;
+            }
+            }
+
+            // User inputs if they would like to perform another operation
+            char choice;
+            std::cout << "Would you like to perform another stack operation? [y/n] ";
+            std::cin >> choice;
+            if (choice != 'y' && choice != 'Y') {
+                again = false;
+                break;
+            }
+            else
+                again = true;
+            std::cout << '\n';
+        }
 
     } else if (stackChoice == 'B' || stackChoice == 'b') {
 
+        // Declare stack choice
         VersionBStack stack;
 
-        // 0 = Success. -1 = failure. Check for push, pop, and status
-        int status = 0;
+        // Flag to perform more operations
+        bool again = true;
 
-        // Test case: trigger underflow
-        Bigram pop1('a', 'a');
-        status = stack.pop(pop1);
-        if (status != 0)
-            std::cout << "Underflow ocurred after popping.\n";
+        while (again) {
 
-        status = 0;
+            // User inputs which stack operation to perform
+            int operationChoice;
+            do {
+                std::cout << "Select stack operation:\nPush[1]\nPop[2]\nStatus[3]\nEnd Program[4]\nOperation Choice: ";
+                std::cin >> operationChoice;
+            } while (operationChoice != 1 && operationChoice != 2 && operationChoice != 3 && operationChoice != 4);
 
-        // Test case: fill stack with no errors
-        stack.push(Bigram('a', 'a'));
-        stack.push(Bigram('b', 'b'));
-        stack.push(Bigram('c', 'c'));
-        stack.push(Bigram('d', 'd'));
-        stack.push(Bigram('e', 'e'));
-        stack.push(Bigram('f', 'f'));
+            // User inputted bigram
+            char inputBigram[3];
 
-        // Test case: trigger overflow
-        status = stack.push(Bigram('f', 'f'));
-        if (status != 0)
-            std::cout << "Overflow occurred after pushing.\n";
+            // Status from stack operations. (0==success. -1==failure)
+            int status;
 
-        Bigram pop2('f', 'f');
-        stack.pop(pop2);
+            switch(operationChoice) {
+            // Push
+            case 1: {
+                // Input bigram to push onto stack
+                std::cout << "Input bigram: ";
+                std::cin >> inputBigram;
 
-        // output top value of stack and the entire stack
-        stack.status();
+                // Initialize bigram object with user input
+                Bigram bigram(inputBigram[0], inputBigram[1]);
+
+                status = stack.push(bigram);
+                if (status != 0)
+                    std::cout << "Overflow occured after pushing\n";
+                else
+                    std::cout << "Successfully pushed: " << bigram.first << bigram.second << '\n';
+                break;
+            }
+            // Pop
+            case 2: {
+                Bigram popped;
+                status = stack.pop(popped);
+                if (status != 0)
+                    std::cout << "Underflow occured after popping\n";
+                else
+                    std::cout << "Successfully popped: " << popped.first << popped.second << '\n';
+                break;
+            }
+            // Status
+            case 3: {
+                status = stack.status();
+                if (status != 0)
+                    std::cout << "Stack is empty.\n";
+                else
+                    std::cout << "Successful stack!\n";
+                break;
+            }
+            // End program
+            default: {
+                std::cout << "Program ended\n";
+                return 0;
+            }
+            }
+
+            // User inputs if they would like to perform another operation
+            char choice;
+            std::cout << "Would you like to perform another stack operation? [y/n] ";
+            std::cin >> choice;
+            if (choice != 'y' && choice != 'Y') {
+                again = false;
+                break;
+            } else
+                again = true;
+            std::cout << '\n';
+        }
     }
 
+    std::cout << "Program ended\n";
     return 0;
 }
