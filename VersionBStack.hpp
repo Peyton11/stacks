@@ -27,24 +27,18 @@ public:
     // Returns true if stack is full. Otherwise false
     bool isFull() const;
 
-
     // Returns true if stack is empty. Otherwise false
     bool isEmpty() const;
 
 private:
+    // Max size of stack
+    int stackSize;
 
-    // Each node contains a bigram and a pointer to the next node
-    struct BigramNode
-    {
-        Bigram value;
-        BigramNode* next;
-    };
+    // Stack pointer
+    Bigram* stackArray;
 
-    // Pointer to track top of stack
-    BigramNode* top;
-
-    // number of nodes
-    int nodeCount;
+    // Indicates the top index of the stack
+    int top;
 };
 
 #endif

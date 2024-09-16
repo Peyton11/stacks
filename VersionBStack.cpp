@@ -4,83 +4,64 @@
 #include "VersionBStack.hpp"
 #include "Bigram.hpp"
 #include <iostream>
-#include <cctype>
 
-// Constructor
+// Constructor. Initialize data members and allocate memory for stack
 VersionBStack::VersionBStack()
-    : nodeCount(0) {
-    top = nullptr;
-}
+    : stackSize(6), top(-1) {
+        stackArray = new Bigram[stackSize];
+    }
 
 // Destructor
 VersionBStack::~VersionBStack() {
 
-    // Traverse each node to free memory
-    BigramNode* nodePtr = top;
-    BigramNode* nextNode = nullptr;
-    while (nodePtr != nullptr) {
-        nextNode = nodePtr->next;
-        delete nodePtr;
-        nodePtr = nextNode;
-    }
+    // Move pointer to first index of array. This is necessary to free the array's memory.
+    // It cannot point to any index but the first
+    stackArray -= top + 1;
+
+    // Free memeory
+    delete[] stackArray;
+    stackArray = nullptr;
 }
 
 // Push bigram onto top of stack
 int VersionBStack::push(const Bigram& bigram) {
-
     if (isFull())
         return -1;
-
-    // Create new node
-    BigramNode* newNode = new BigramNode;
-    newNode->value = bigram;
-    ++nodeCount;
-
-    if (isEmpty()) {
-        top = newNode;
-        newNode->next = nullptr;
-    } else {
-        newNode->next = top;
-        top = newNode;
+    else {
+        ++top;
+        *(++stackArray) = bigram;
+        return 0;
     }
-
-    return 0;
 }
 
 // Remove bigram from top of stack
 int VersionBStack::pop(Bigram& bigram) {
-    if (isEmpty())
+    if (isEmpty()) {
         return -1;
+    }
     else {
-        // Modify parameter for the user
-        bigram.first = top->value.first;
-        bigram.second = top->value.second;
-
-        // Pop top node off, deleting it
-        BigramNode* temp = top->next;
-        delete top;
-        top = temp;
-        --nodeCount;
-
+        bigram = *(stackArray--);
+        --top;
         return 0;
     }
 }
 
 // Show contents and stack pointer
 int VersionBStack::status() const {
-    if (isEmpty())
+    if (isEmpty()) {
         return -1;
+    }
 
-    // Output the top bigram of the stack
-    std::cout << "Stack top: " << top->value.first << top->value.second << '\n';
+    // Create temporary variables to avoid messing up internal structure of stack (actual values of top and stackArray).
+    Bigram* tempPtr = stackArray;
+    int tempTop = top;
 
-    // Traverse each node to output the entire stack
-    BigramNode* nodePtr = top;
-    int indexNumber = nodeCount - 1;
-    while (nodePtr != nullptr) {
-        std::cout << "Index " << indexNumber << "- " << nodePtr->value.first << nodePtr->value.second << '\n';
-        nodePtr = nodePtr->next;
-        --indexNumber;
+    // Output bigram at the top of the stack and output the entire stack
+    std::cout << "Stack pointer: " << (*stackArray).first << (*stackArray).second << '\n';
+    while (tempPtr != nullptr && tempTop >= 0) {
+        std::cout << "Index " << tempTop << "- " << (*tempPtr).first << (*tempPtr).second << '\n';
+        --tempPtr;
+        --tempTop;
     }
 
     return 0;
@@ -88,16 +69,15 @@ int VersionBStack::status() const {
 
 // Returns true if stack is full. Otherwise false
 bool VersionBStack::isFull() const {
-    if (nodeCount == 6)
+    if (top == stackSize - 1)
         return true;
     else
         return false;
 }
 
-
 // Returns true if stack is empty. Otherwise false
 bool VersionBStack::isEmpty() const {
-    if (nodeCount == 0)
+    if (top == -1)
         return true;
     else
         return false;
