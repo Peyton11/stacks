@@ -5,6 +5,7 @@
 #include "VersionBStack.hpp"
 #include "Bigram.hpp"
 #include <iostream>
+#include <limits>
 
 int main() {
 
@@ -42,9 +43,10 @@ int main() {
             switch(operationChoice) {
             // Push
             case 1: {
-                // Input bigram to push onto stack
+                // Input bigram to push onto stack. Clear input buffer after to avoid bugs
                 std::cout << "Input bigram: ";
                 std::cin >> inputBigram;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
                 // Initialize bigram object with user input
                 Bigram bigram(inputBigram[0], inputBigram[1]);
@@ -53,7 +55,7 @@ int main() {
                 if (status != 0)
                     std::cout << "Overflow occured after pushing\n";
                 else
-                    std::cout << "Successfully pushed: " << bigram.first << bigram.second << '\n';
+                    std::cout << "Successfully pushed: " << bigram.characters << '\n';
                 break;
             }
             // Pop
@@ -63,7 +65,7 @@ int main() {
                 if (status != 0)
                     std::cout << "Underflow occured after popping\n";
                 else
-                    std::cout << "Successfully popped: " << popped.first << popped.second << '\n';
+                    std::cout << "Successfully popped: " << popped.characters << '\n';
                 break;
             }
             // Status
@@ -121,9 +123,10 @@ int main() {
             switch(operationChoice) {
             // Push
             case 1: {
-                // Input bigram to push onto stack
+                // Input bigram to push onto stack. Clear input buffer after to avoid bugs
                 std::cout << "Input bigram: ";
                 std::cin >> inputBigram;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
                 // Initialize bigram object with user input
                 Bigram bigram(inputBigram[0], inputBigram[1]);
@@ -132,7 +135,7 @@ int main() {
                 if (status != 0)
                     std::cout << "Overflow occured after pushing\n";
                 else
-                    std::cout << "Successfully pushed: " << bigram.first << bigram.second << '\n';
+                    std::cout << "Successfully pushed: " << bigram.characters << '\n';
                 break;
             }
             // Pop
@@ -142,7 +145,7 @@ int main() {
                 if (status != 0)
                     std::cout << "Underflow occured after popping\n";
                 else
-                    std::cout << "Successfully popped: " << popped.first << popped.second << '\n';
+                    std::cout << "Successfully popped: " << popped.characters << '\n';
                 break;
             }
             // Status

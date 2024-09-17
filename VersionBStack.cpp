@@ -57,9 +57,9 @@ int VersionBStack::status() const {
     int tempTop = top;
 
     // Output bigram at the top of the stack and output the entire stack
-    std::cout << "Stack pointer: " << (*stackArray).first << (*stackArray).second << '\n';
+    std::cout << "Stack pointer: " << (*stackArray).characters << '\n';
     while (tempPtr != nullptr && tempTop >= 0) {
-        std::cout << "Index " << tempTop << "- " << (*tempPtr).first << (*tempPtr).second << '\n';
+        std::cout << "Index " << tempTop << "- " << (*tempPtr).characters << '\n';
         --tempPtr;
         --tempTop;
     }

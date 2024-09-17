@@ -8,16 +8,17 @@
 
 struct Bigram {
 
-    char first;
-    char second;
+    char characters[3];
 
     // Default constructor
     Bigram() = default;
 
     // Constructor to initialize bigram
-    Bigram(char first, char second)
-        : first(toupper(first)), second(toupper(second))
-        {}
+    Bigram(char first, char second) {
+        characters[0] = toupper(first);
+        characters[1] = toupper(second);
+        characters[2] = '\0';
+    }
 };
 
 #endif

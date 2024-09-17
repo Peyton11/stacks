@@ -5,7 +5,7 @@
 #include "Bigram.hpp"
 #include <iostream>
 
-// Constructor 
+// Constructor
 VersionAStack::VersionAStack()
     : stackSize(6), top(-1) {
         stackArray = new Bigram[stackSize];
@@ -46,9 +46,9 @@ int VersionAStack::status() const {
     }
 
     // Output bigram at the top of the stack and output the entire stack
-    std::cout << "Stack pointer: " << stackArray[top].first << stackArray[top].second << '\n';
+    std::cout << "Stack pointer: " << stackArray[top].characters << '\n';
     for (int i = top; i >= 0; --i) {
-        std::cout << "Index " << i << "- " << stackArray[i].first << stackArray[i].second << '\n';
+        std::cout << "Index " << i << "- " << stackArray[i].characters << '\n';
     }
     return 0;
 }
