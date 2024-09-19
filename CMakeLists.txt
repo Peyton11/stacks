@@ -8,4 +8,4 @@ project(ASSGN1)
 set(CMAKE_CXX_STANDARD 20)
 
 # Add executable and specify source files
-add_executable(ASSGN1 main.cpp VersionAStack.cpp VersionBStack.cpp)
+add_executable(stacks main.cpp VersionAStack.cpp VersionBStack.cpp)
